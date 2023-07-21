@@ -1,0 +1,6 @@
+{{- /**/ -}}
+<q itemscope itemtype="Quotation"{{- if .Params -}}{{- with .Params.cite }} cite="{{ . }}"{{- end -}}>
+  {{- with .Params.cite -}}<meta itemprop="isBasedOn" content="{{ . }}">{{- end -}}{{- else -}}>{{- end -}}
+  {{- .Inner | safeHTML -}}
+</q>
+{{- /**/ -}}
