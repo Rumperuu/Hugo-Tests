@@ -2,7 +2,7 @@
 title: Foo
 ---
 
-## Issue 1: <{{ in comment block
+## Issue 1: `<` on its own
 
 (look at the source for the page here)
 
