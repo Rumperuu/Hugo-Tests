@@ -41,3 +41,17 @@ This is the same shortcode without a gap: {{< bar >}}This should be a cite.{{< /
 
 Here's the gap one again, but with whitespace removal: {{< zoo >}}This should be a cite.{{< /zoo >}}
 {{< /blockquote >}}
+
+**Now let's try a Markdown blockquote:**
+
+> This is a **Markdown** test.
+>
+> This is an <b>HTML</b> test.
+>
+> This is a {{< q >}}shortcode with closing shortcode{{< /q >}}.
+>
+> This is a shortcode with a gap in the tag: {{< baz >}}This should be a cite.{{< /baz >}}
+>
+> This is the same shortcode without a gap: {{< bar >}}This should be a cite.{{< /bar >}}
+>
+> Here's the gap one again, but with whitespace removal: {{< zoo >}}This should be a cite.{{< /zoo >}}
