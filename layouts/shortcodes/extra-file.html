@@ -1,0 +1,2 @@
+{{ $file := path.Join $.Page.File.Dir "other-file.md" | readFile }}
+{{ $file | $.Page.RenderString }}
