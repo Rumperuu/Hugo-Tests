@@ -204,3 +204,13 @@ We can wrap the org-mode-rendered version in a pair of `<pre>` elements:
 If we [copy-paste the content of this `<pre>`](https://spec.commonmark.org/dingus/?text=%3E%20%3Ccite%0A%3EThis%20should%20be%20a%20cite.%3C%2Fcite%3E%0A%3E%20%0A%3E%20%3Ccite%3EThis%20should%20be%20a%20cite.%3C%2Fcite%3E) into the CommonMark reference implementation, we get a different rendering than the one seen in the previous step.
 
 **Conclusion:** The issue is specific to the Markdown parser/renderer, which seems to go off-spec when parsing here.
+
+We can pipe the above org-mode-generated string directly into `.Page.RenderString`:
+
+{{< render-string-direct >}}
+
+...which results in the same output as the reference implementation, and not the messy nested blockquote that we see in the examples detailed here.
+
+**Conclusion:** The content, rendered via org-mode and then passed to `.Page.RenderString`, renders correctly per the reference implementation. Passing it directly to the Markdown renderer, however, completely breaks its parsing of HTML, to the point of breaking out of even a surrounding `<pre>` environment.
+
+You can [add a newline inside an HTML tag](https://spec.commonmark.org/dingus/?text=%3E%20%3Ccite%20%0Astyle%0A%3D%0A%22%0Acolor%0A%3A%0Ablue%0A%3B%0A%22%3EThis%20should%20be%20a%20cite.%3C%2Fcite%3E%0A%0A%3E%20%3C%0Acite%20%0Astyle%0A%3D%0A%22%0Acolor%0A%3A%0Ablue%0A%3B%0A%22%3EThis%20should%20be%20a%20cite.%3C%2Fcite%3E%0A%0A%3E%20%3Ccite%20%0Astyle%0A%3D%0A%22%0Acolor%0A%3A%0Ablue%0A%3B%0A%22%0A%3EThis%20should%20be%20a%20cite.%3C%2Fcite%3E%0A%0A%3E%20%3Ccite%20style%3D%22color%3Ablue%3B%22%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3EThis%20should%20be%20a%20cite.%3C%2Fcite%3E) at seemingly any point and Markdown will still parse them correctly, UNLESS the newline is immediately after the opening `<` or before the closing `>`. That makes sense for the opening `<`s as the Markdown parser replaces those newlines with spaces, and spaces between the `<` and the tag name are invalid, but it doesn't make any sense for the closing `>` (and, as you can see in that example, you can add as many _spaces_ as you like and it'll still parse as HTML).
