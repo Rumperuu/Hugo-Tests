@@ -107,7 +107,7 @@ Here's the one with a newline again, but with Hugo templating whitespace removal
 
 ### Exploration
 
-This happens when using the HUGO%/%HUGO syntax too:
+This happens when using the `{{%/**/%}}` syntax too:
 
 {{% blockquote %}}
 This is a **Markdown** test.
@@ -214,3 +214,5 @@ We can pipe the above org-mode-generated string directly into `.Page.RenderStrin
 **Conclusion:** The content, rendered via org-mode and then passed to `.Page.RenderString`, renders correctly per the reference implementation. Passing it directly to the Markdown renderer, however, completely breaks its parsing of HTML, to the point of breaking out of even a surrounding `<pre>` environment.
 
 You can [add a newline inside an HTML tag](https://spec.commonmark.org/dingus/?text=%3E%20%3Ccite%20%0Astyle%0A%3D%0A%22%0Acolor%0A%3A%0Ablue%0A%3B%0A%22%3EThis%20should%20be%20a%20cite.%3C%2Fcite%3E%0A%0A%3E%20%3C%0Acite%20%0Astyle%0A%3D%0A%22%0Acolor%0A%3A%0Ablue%0A%3B%0A%22%3EThis%20should%20be%20a%20cite.%3C%2Fcite%3E%0A%0A%3E%20%3Ccite%20%0Astyle%0A%3D%0A%22%0Acolor%0A%3A%0Ablue%0A%3B%0A%22%0A%3EThis%20should%20be%20a%20cite.%3C%2Fcite%3E%0A%0A%3E%20%3Ccite%20style%3D%22color%3Ablue%3B%22%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3EThis%20should%20be%20a%20cite.%3C%2Fcite%3E) at any point and Markdown will still parse them correctly, UNLESS the newline is immediately after the opening `<` or before the closing `>`. That [makes sense](https://spec.commonmark.org/0.30/#example-153) given the [seventh start condition](https://spec.commonmark.org/0.30/#html-blocks) from the spec, which requires that the 'line begins with a complete open tag'.
+
+[This blog post](https://oostens.me/posts/hugo-shortcodes-with-markdown-gotchas/#solution) suggests that one shouldn't trim whitespace around the `.Inner` if using `{{%/**/%}}`, but that doesn't seem to have had any effect on the blockquote shortcode.
