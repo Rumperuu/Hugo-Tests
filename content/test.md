@@ -75,7 +75,7 @@ If we wrap the above block in `<pre>`s:
 
 ### Expected Result
 
-{{% blockquote %}}
+{{< blockquote >}}
 This is a **Markdown** test.
 
 This is an <b>HTML</b> test.
@@ -87,9 +87,27 @@ This is a shortcode with a newline before the closing `>`: {{< tag-closed-on-new
 This is the same shortcode without a newline: {{< tag-normal >}}This should be a cite.{{< /tag-normal >}}
 
 Here's the one with a newline again, but with Hugo templating whitespace removal: {{< tag-closed-on-newline-with-whitespace-removal >}}This should be a cite.{{< /tag-closed-on-newline-with-whitespace-removal >}}
-{{% /blockquote %}}
+{{< /blockquote >}}
 
 ### Actual Result
+
+{{< blockquote >}}
+This is a **Markdown** test.
+
+This is an <b>HTML</b> test.
+
+This is a {{< q >}}shortcode with closing shortcode{{< /q >}}.
+
+This is a shortcode with a newline before the closing `>`: {{< tag-closed-on-newline >}}This should be a cite.{{< /tag-closed-on-newline >}}
+
+This is the same shortcode without a newline: {{< tag-normal >}}This should be a cite.{{< /tag-normal >}}
+
+Here's the one with a newline again, but with Hugo templating whitespace removal: {{< tag-closed-on-newline-with-whitespace-removal >}}This should be a cite.{{< /tag-closed-on-newline-with-whitespace-removal >}}
+{{< /blockquote >}}
+
+### Exploration
+
+This happens when using the HUGO%/%HUGO syntax too:
 
 {{% blockquote %}}
 This is a **Markdown** test.
@@ -104,8 +122,6 @@ This is the same shortcode without a newline: {{< tag-normal >}}This should be a
 
 Here's the one with a newline again, but with Hugo templating whitespace removal: {{< tag-closed-on-newline-with-whitespace-removal >}}This should be a cite.{{< /tag-closed-on-newline-with-whitespace-removal >}}
 {{% /blockquote %}}
-
-### Exploration
 
 This is what happens when the above is written inside a Markdown blockquote (rather than my blockquote shortcode):
 
